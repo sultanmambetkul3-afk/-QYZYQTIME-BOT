@@ -1,0 +1,29 @@
+name: QYZYQTIME BOT
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  bot-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check bot files
+        run: |
+          node --check index.js
+          node --check bot.js
+          node --check config.js
+          node --check start.js
